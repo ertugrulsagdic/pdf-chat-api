@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status, UploadFile, HTTPException
 
-from models.file_dto import FileDTO
+from models.file_models import FileDTO
 
 import services.file_service as file_service
 

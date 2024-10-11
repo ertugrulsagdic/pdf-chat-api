@@ -2,7 +2,7 @@
 from fastapi import APIRouter, status, HTTPException
 import os
 
-from models.chat_dto import ChatReqDTO, ChatDTO
+from models.chat_models import ChatReqDTO, ChatDTO
 
 import services.chat_service as chat_service
 

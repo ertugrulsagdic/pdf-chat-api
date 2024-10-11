@@ -1,5 +1,5 @@
 
-from models.chat_dto import ChatDTO
+from models.chat_models import ChatDTO
 
 
 def chat_w_file() -> ChatDTO | None:

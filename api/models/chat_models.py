@@ -1,8 +1,7 @@
 from pydantic import BaseModel
 
 class ChatReqDTO(BaseModel):
-    id: str
-    name: str
+    pdf_id: str
     message: str
 
 class ChatDTO(BaseModel):
