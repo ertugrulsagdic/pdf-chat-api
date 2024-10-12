@@ -8,8 +8,8 @@ class FileDTO(BaseModel):
 
 class FileMetadata(BaseModel):
     pdf_id: str
+    file_path: str
     file_name: str
-    file_type: str
     file_size: int
     created_at: datetime = Field(default_factory=datetime)
     updated_at: datetime = Field(default_factory=datetime)

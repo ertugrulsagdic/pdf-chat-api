@@ -25,9 +25,9 @@ async def create_file(file: UploadFile) -> FileDTO | None:
     if metadata is None:
         metadata = FileMetadata(
             pdf_id=str(file_id),
+            file_path=UPLOAD_PATH,
             file_name=file.filename,
             file_size=file.size,
-            file_type=file.content_type,
             created_at=datetime.now(),
             updated_at=datetime.now()
         )
