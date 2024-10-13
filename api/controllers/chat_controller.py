@@ -20,7 +20,7 @@ async def chat_w_file(body: ChatReqDTO):
     if metadata is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
 
-    chat_response = chat_service.chat_w_file(metadata)
+    chat_response = chat_service.chat_w_file(body)
 
     if chat_response is None:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Chat could not be created")

@@ -2,7 +2,7 @@
 from io import BytesIO
 import io
 from fastapi import UploadFile
-from utils.vectorstore_manager import VectorStoreManager
+from utils.rag_manager import RAGManager
 from models.file_models import FileDTO, FileMetadata
 
 import os
@@ -48,6 +48,6 @@ async def create_file(file: UploadFile) -> FileDTO | None:
     with open(pdfname, 'wb') as f:
         f.write(contents)
 
-    VectorStoreManager.save_file_chunks(pdfname, pdf_id)
+    RAGManager.indexing(pdfname, pdf_id)
 
     return FileDTO(pdf_id=str(pdf_id))

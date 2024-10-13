@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 class ChatReqDTO(BaseModel):
     pdf_id: str
-    message: str
+    query: str
 
 class ChatDTO(BaseModel):
-    answer: str
+    response: str

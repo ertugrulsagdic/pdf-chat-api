@@ -1,25 +1,31 @@
+from uuid import uuid4
 import chromadb
 from constants import DATABASE_PATH
-from vectorstore.gemini_embedding import GeminiEmbeddingFunction
+from langchain_chroma import Chroma
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
 
 class VectorStore:
+    
     @classmethod
     def get_instance(cls, db_name: str):
-        db_path = DATABASE_PATH
-        client = chromadb.PersistentClient(db_path)
-            # Check if collection exists
-        existing_collections = client.list_collections()
-        collection_names = [col.name for col in existing_collections]
-        print(f"Existing collections: {collection_names}")
+        client = chromadb.PersistentClient(DATABASE_PATH)
         
-        if db_name not in collection_names:
-            instance = client.create_collection(
-                db_name,
-                embedding_function=GeminiEmbeddingFunction()
+        return Chroma(
+            client=client, 
+            collection_name=db_name,
+            embedding_function=GoogleGenerativeAIEmbeddings(model="models/embedding-001")
             )
-        else:
-            instance = client.get_collection(name=db_name, embedding_function=GeminiEmbeddingFunction())
-        return instance
-    
-    
-    
+        
+    @classmethod
+    def store_documents(cls, db_name: str, documents: list):
+        vectorstore = cls.get_instance(db_name)
+        vectorstore.add_documents(
+            documents=documents, 
+            ids=[str(uuid4()) for _ in range(len(documents))],
+        )
+        
+    @classmethod
+    def get_number_of_documents(cls, db_name: str):
+        vectorstore = cls.get_instance(db_name)
+        return len(vectorstore.get()['documents'])
