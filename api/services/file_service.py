@@ -1,5 +1,8 @@
 
+from io import BytesIO
+import io
 from fastapi import UploadFile
+from utils.vectorstore_manager import VectorStoreManager
 from models.file_models import FileDTO, FileMetadata
 
 import os
@@ -18,15 +21,18 @@ async def create_file(file: UploadFile) -> FileDTO | None:
     # generate file id according to file contents using md5 hash
     # since we limited the file size to 1MB, this should be performant
     # for larger files, we should consider using a different approach
-    file_id = HashingManager.md5_file_hashing(contents)
+    pdf_id = HashingManager.md5_file_hashing(contents)
 
-    metadata = FilesMetadataManager.get_metadata(file_id)
+    metadata = FilesMetadataManager.get_metadata(pdf_id)
+
+    file_extension = file.filename.split('.')[-1]
 
     if metadata is None:
         metadata = FileMetadata(
-            pdf_id=str(file_id),
+            pdf_id=str(pdf_id),
             file_path=UPLOAD_PATH,
-            file_name=file.filename,
+            file_extension=file_extension,
+            actual_file_name=file.filename,
             file_size=file.size,
             created_at=datetime.now(),
             updated_at=datetime.now()
@@ -36,11 +42,12 @@ async def create_file(file: UploadFile) -> FileDTO | None:
 
     FilesMetadataManager.save_metadata(metadata)
 
-    file_extension = file.filename.split('.')[-1]
-
+    pdfname = f"{UPLOAD_PATH}{pdf_id}.{file_extension}"
     # We could have uploaded the file to a cloud storage service (AWS S3, Google Cloud Storage etc.)
     # but for simplicity, I stored the file in the local filesystem
-    with open(f"{UPLOAD_PATH}/{file_id}.{file_extension}", 'wb') as f:
+    with open(pdfname, 'wb') as f:
         f.write(contents)
 
-    return FileDTO(pdf_id=str(file_id))
+    VectorStoreManager.save_file_chunks(pdfname, pdf_id)
+
+    return FileDTO(pdf_id=str(pdf_id))
