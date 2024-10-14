@@ -26,15 +26,14 @@ The PDF Chat API lets users upload PDF files, extract their content, and ask que
 ### Requirements
 
 - Python 3.10
+- fastapi[standard]
 - chromadb==0.5.13
-- fastapi==0.115.2
 - langchain==0.3.3
 - langchain_chroma==0.1.4
 - langchain_community==0.3.2
 - langchain_core==0.3.10
 - langchain_google_genai==2.0.1
 - langchain_text_splitters==0.3.0
-- pydantic==2.9.2
 - python-dotenv==1.0.1
 
 ### Setup
