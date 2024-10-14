@@ -1,16 +1,14 @@
 
-from io import BytesIO
-import io
-from fastapi import UploadFile
-from utils.rag_manager import RAGManager
-from models.file_models import FileDTO, FileMetadata
-
 import os
-from utils.hashing_manager import HashingManager
-from utils.files_metadata_manager import FilesMetadataManager
 from datetime import datetime
 
 from constants import UPLOAD_PATH
+from fastapi import UploadFile
+from models.file_models import FileDTO, FileMetadata
+from utils.files_metadata_manager import FilesMetadataManager
+from utils.hashing_manager import HashingManager
+from utils.rag_manager import RAGManager
+
 
 async def create_file(file: UploadFile) -> FileDTO | None:
     if not os.path.exists(UPLOAD_PATH):

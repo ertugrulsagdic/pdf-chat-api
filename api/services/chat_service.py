@@ -1,6 +1,7 @@
 
-from utils.rag_manager import RAGManager
 from models.chat_models import ChatDTO
+from utils.rag_manager import RAGManager
+
 
 def chat_w_file(pdf_id, query) -> ChatDTO | None:
       

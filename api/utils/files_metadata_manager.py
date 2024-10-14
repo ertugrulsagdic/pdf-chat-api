@@ -1,7 +1,8 @@
 import json
 
+from constants import METADATA_FILE, UPLOAD_PATH
 from models.file_models import FileMetadata
-from constants import UPLOAD_PATH, METADATA_FILE
+
 
 # We could have used a database (MongoDB, Postgres etc.) to store metadata
 # but for simplicity I used a json file to store metadata of uploaded files

@@ -1,26 +1,12 @@
-from fastapi import FastAPI
-
-from vectorstore.context import VectorStore
-from controllers import file_controller
-from controllers import chat_controller
-
+from controllers import chat_controller, file_controller
 from dotenv import load_dotenv
+from fastapi import FastAPI
 
 app = FastAPI(
     root_path="/v1",
     title="Document Chat API",
     summary="API for uploading and chatting with documents using Gemini",
 )
-
-# import os
-# from constants import UPLOAD_PATH
-
-# if os.path.exists(UPLOAD_PATH):
-#     # remove all files in the uploads directory
-#     for file in os.listdir(UPLOAD_PATH):
-#         os.remove(f"{UPLOAD_PATH}/{file}")
-
-#     os.rmdir(UPLOAD_PATH)
     
 load_dotenv()
     

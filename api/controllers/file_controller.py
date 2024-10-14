@@ -1,8 +1,6 @@
-from fastapi import APIRouter, status, UploadFile, HTTPException
-
-from models.file_models import FileDTO
-
 import services.file_service as file_service
+from fastapi import APIRouter, HTTPException, UploadFile, status
+from models.file_models import FileDTO
 
 router = APIRouter(
     prefix="/pdf",

@@ -1,10 +1,8 @@
 
-from fastapi import APIRouter, status, HTTPException
-from utils.files_metadata_manager import FilesMetadataManager
-
-from models.chat_models import ChatReqDTO, ChatDTO
-
 import services.chat_service as chat_service
+from fastapi import APIRouter, HTTPException, status
+from models.chat_models import ChatDTO, ChatReqDTO
+from utils.files_metadata_manager import FilesMetadataManager
 
 router = APIRouter(
     prefix="/chat",

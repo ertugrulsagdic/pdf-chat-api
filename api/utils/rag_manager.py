@@ -1,10 +1,11 @@
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from vectorstore.context import VectorStore
-from langchain_community.document_loaders import PyPDFLoader
 from langchain import hub
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from utils.llm_manager import LLMManager
+from vectorstore.context import VectorStore
+
 
 class RAGManager:
     
