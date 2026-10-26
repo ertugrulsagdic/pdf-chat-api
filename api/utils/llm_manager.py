@@ -10,4 +10,4 @@ class LLMManager:
         gemini_api_key = os.getenv("GOOGLE_API_KEY")
         if not gemini_api_key:
             raise ValueError("Gemini API Key not provided. Please provide GOOGLE_API_KEY as an environment variable")
-        return GoogleGenerativeAI(model="gemini-1.5-flash", api_key=gemini_api_key)
+        return GoogleGenerativeAI(model="gemini-3.5-flash-lite", api_key=gemini_api_key)
